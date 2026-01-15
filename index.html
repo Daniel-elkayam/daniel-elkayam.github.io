@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- רקע כוכבים -->
 <div id="stars"></div>
 
 <header class="hero">
@@ -29,31 +28,18 @@
 </section>
 
 <section class="gallery-section">
-  <button id="openGallery" class="main-btn">
+  <button id="openGallery" class="main-btn small-btn">
     לצפייה בסרטונים ובתמונות
   </button>
-
-  <!-- הגלריה מוסתרת לחלוטין -->
-  <div id="gallery" class="gallery hidden">
-    <!-- תמונות -->
-    <img src="1.jpg">
-    <img src="2.jpg">
-    <img src="4.jpg">
-    <img src="5.jpg">
-    <img src="6.jpg">
-    <img src="7.jpg">
-    <img src="8.jpg">
-    <img src="9.jpg">
-    <img src="10.jpg">
-    <img src="11.jpg">
-    <img src="12.jpg">
-
-    <!-- סרטונים -->
-    <video controls src="1.mp4"></video>
-    <video controls src="2.mp4"></video>
-    <video controls src="3.mp4"></video>
-  </div>
 </section>
+
+<!-- MODAL גלריה -->
+<div id="modal" class="modal hidden">
+  <span class="close">✕</span>
+  <span class="arrow left">‹</span>
+  <div class="media-container"></div>
+  <span class="arrow right">›</span>
+</div>
 
 <section class="contact">
   <h3>יצירת קשר</h3>
@@ -69,19 +55,68 @@
 </section>
 
 <script>
-/* פתיחת גלריה */
+const media = [
+  "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg",
+  "8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
+  "1.mp4","2.mp4","3.mp4"
+];
+
+let index = 0;
+
+const modal = document.getElementById("modal");
+const container = document.querySelector(".media-container");
+
 document.getElementById("openGallery").onclick = () => {
-  document.getElementById("gallery").classList.remove("hidden");
-  document.getElementById("openGallery").style.display = "none";
+  index = 0;
+  openMedia();
+  modal.classList.remove("hidden");
 };
 
-/* שליחת וואטסאפ */
+function openMedia(){
+  container.innerHTML = "";
+  const src = media[index];
+
+  if(src.endsWith(".mp4")){
+    const video = document.createElement("video");
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    container.appendChild(video);
+  } else {
+    const img = document.createElement("img");
+    img.src = src;
+    container.appendChild(img);
+  }
+}
+
+document.querySelector(".arrow.right").onclick = () => {
+  index = (index + 1) % media.length;
+  openMedia();
+};
+
+document.querySelector(".arrow.left").onclick = () => {
+  index = (index - 1 + media.length) % media.length;
+  openMedia();
+};
+
+document.querySelector(".close").onclick = () => {
+  modal.classList.add("hidden");
+};
+
+modal.onclick = e => {
+  if(e.target === modal) modal.classList.add("hidden");
+};
+
+/* וואטסאפ */
 function sendWhatsApp(e){
   e.preventDefault();
-  const name = document.getElementById("name").value;
-  const msg = document.getElementById("message").value;
-  const text = `שלום, שמי ${name}. ${msg}`;
-  window.open(`https://wa.me/972547921248?text=${encodeURIComponent(text)}`);
+  const name = name.value;
+  const msg = message.value;
+  window.open(
+    `https://wa.me/972547921248?text=${encodeURIComponent(
+      `שלום, שמי ${name}. ${msg}`
+    )}`
+  );
 }
 </script>
 
