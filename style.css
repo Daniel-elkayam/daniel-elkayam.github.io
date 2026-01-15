@@ -112,21 +112,13 @@ body{
 .main-btn{
   background: linear-gradient(
     135deg,
-    #1c2f4a,
-    #0f1f36
+    #2f3f55,
+    #24364d
   );
-  padding: 14px 28px;
-  border: none;
-  border-radius: 999px;
-  color: white;
-  font-size: 1.05rem;
-  margin: 60px auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
+
+
 
 
 .main-btn:hover{
@@ -235,5 +227,6 @@ form button{
     transform:none !important;
   }
 }
+
 
 
