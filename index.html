@@ -2,33 +2,41 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <title>דניאל אלקיים – פיקוח בנייה</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>דניאל אלקיים – פיקוח בנייה ושיפוצים</title>
 
   <meta property="og:title" content="דניאל אלקיים – פיקוח בנייה ושיפוצים">
-  <meta property="og:description" content="פיקוח מקצועי, ליווי אישי ושקט נפשי מלא">
+  <meta property="og:description" content="פיקוח יוקרתי, ליווי אישי ושקט נפשי">
   <meta property="og:image" content="3.jpg">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="hero">
-  <h1>דניאל אלקיים</h1>
-  <p>פיקוח בנייה ושיפוצים ברמה הגבוהה ביותר</p>
+<!-- רקע אנימציה -->
+<div class="animated-bg"></div>
 
-  <a class="btn-whatsapp"
+<!-- פתיחה -->
+<header class="hero">
+  <h1 class="intro-title">דניאל אלקיים</h1>
+  <p class="intro-sub">פיקוח בנייה ושיפוצים ברמה הגבוהה ביותר</p>
+
+  <a class="btn-main"
      href="https://wa.me/972547921248?text=שלום,%20אשמח%20לשיחת%20ייעוץ"
      target="_blank">
-     📲 לייעוץ בוואטסאפ
+     📲 ייעוץ בוואטסאפ
   </a>
+
+  <button class="btn-gallery" onclick="showGallery()">
+    ▶ לצפייה בסרטונים ובתמונות
+  </button>
 </header>
 
-<section class="gallery">
-  <h2>תמונות מהשטח</h2>
+<!-- גלריה מוסתרת -->
+<section id="gallery" class="gallery hidden">
+  <h2>מהשטח</h2>
 
   <div class="media-grid">
-    <!-- Images -->
     <img src="1.jpg" onclick="openLightbox(0)">
     <img src="2.jpg" onclick="openLightbox(1)">
     <img src="4.jpg" onclick="openLightbox(2)">
@@ -41,7 +49,6 @@
     <img src="11.jpg" onclick="openLightbox(9)">
     <img src="12.jpg" onclick="openLightbox(10)">
 
-    <!-- Videos -->
     <video src="1.mp4" onclick="openLightbox(11)"></video>
     <video src="2.mp4" onclick="openLightbox(12)"></video>
     <video src="3.mp4" onclick="openLightbox(13)"></video>
@@ -53,7 +60,7 @@
   <p>📧 <a href="mailto:Elkayam.pikuah@gmail.com">Elkayam.pikuah@gmail.com</a></p>
 </footer>
 
-<!-- LIGHTBOX -->
+<!-- Lightbox -->
 <div id="lightbox" class="lightbox">
   <span class="close" onclick="closeLightbox()">×</span>
   <span class="arrow left" onclick="changeSlide(-1)">❮</span>
@@ -63,47 +70,59 @@
 
 <script>
 const media = [
-  "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
-  "1.mp4","2.mp4","3.mp4"
+ "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
+ "1.mp4","2.mp4","3.mp4"
 ];
 
-let currentIndex = 0;
+let index = 0;
+let startX = 0;
 
-function openLightbox(index) {
-  currentIndex = index;
+function showGallery() {
+  document.getElementById("gallery").classList.remove("hidden");
+  document.getElementById("gallery").scrollIntoView({behavior:"smooth"});
+}
+
+function openLightbox(i) {
+  index = i;
   document.getElementById("lightbox").style.display = "flex";
-  showMedia();
+  render();
 }
 
 function closeLightbox() {
   document.getElementById("lightbox").style.display = "none";
 }
 
-function changeSlide(direction) {
-  currentIndex += direction;
-  if (currentIndex < 0) currentIndex = media.length - 1;
-  if (currentIndex >= media.length) currentIndex = 0;
-  showMedia();
+function changeSlide(dir) {
+  index = (index + dir + media.length) % media.length;
+  render();
 }
 
-function showMedia() {
-  const container = document.getElementById("lightbox-content");
-  container.innerHTML = "";
-
-  const file = media[currentIndex];
+function render() {
+  const box = document.getElementById("lightbox-content");
+  box.innerHTML = "";
+  const file = media[index];
 
   if (file.endsWith(".mp4")) {
-    const video = document.createElement("video");
-    video.src = file;
-    video.controls = true;
-    video.autoplay = true;
-    container.appendChild(video);
+    const v = document.createElement("video");
+    v.src = file;
+    v.controls = true;
+    v.autoplay = true;
+    box.appendChild(v);
   } else {
     const img = document.createElement("img");
     img.src = file;
-    container.appendChild(img);
+    box.appendChild(img);
   }
 }
+
+/* החלקה במובייל */
+const lb = document.getElementById("lightbox");
+lb.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+lb.addEventListener("touchend", e => {
+  const endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) changeSlide(1);
+  if (endX - startX > 50) changeSlide(-1);
+});
 </script>
 
 </body>
