@@ -20,6 +20,8 @@ body{
 
 .star{
   position:absolute;
+  box-shadow: 0 0 8px rgba(255,255,255,.9);
+  transform: scale(var(--s,1));
   width:4px;
   height:4px;
   background:white;
@@ -27,20 +29,32 @@ body{
     50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,
     50% 70%,21% 91%,32% 57%,2% 35%,39% 35%
   );
-  animation:
-    float 20s linear infinite,
-    breathe 4s ease-in-out infinite;
+  animation: float 20s linear infinite;
 }
 
+.star::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:inherit;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+
 @keyframes float{
-  from{transform:translateY(100vh) rotate(0deg)}
-  to{transform:translateY(-120vh) rotate(360deg)}
+  from{
+    transform:translateY(100vh) rotate(0deg) translateZ(0);
+  }
+  to{
+    transform:translateY(-120vh) rotate(360deg) translateZ(80px);
+  }
 }
 
 @keyframes breathe{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.6)}
 }
+
 
 /* HERO */
 .hero{
@@ -204,5 +218,6 @@ form button{
     border-radius: 14px;
   }
 }
+
 
 
