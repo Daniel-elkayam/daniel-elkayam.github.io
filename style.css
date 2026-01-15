@@ -5,8 +5,8 @@
 
 body{
   margin:0;
+  background:radial-gradient(circle at top,#0b2a5e,#030b26);
   color:#fff;
-  background:linear-gradient(180deg,#061a44,#020617);
   overflow-x:hidden;
 }
 
@@ -14,38 +14,55 @@ body{
 #stars{
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(2px 2px at 10% 20%,#fff,transparent),
-    radial-gradient(1px 1px at 30% 80%,#8ecbff,transparent),
-    radial-gradient(2px 2px at 70% 40%,#fff,transparent),
-    radial-gradient(1px 1px at 90% 10%,#9fd3ff,transparent);
-  animation:stars 40s linear infinite, breath 6s ease-in-out infinite;
   z-index:-1;
+  transform-style:preserve-3d;
 }
 
-@keyframes stars{
-  to{transform:translateY(-1000px)}
-}
-@keyframes breath{
-  0%,100%{opacity:.7}
-  50%{opacity:1}
+.star{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:white;
+  clip-path:polygon(
+    50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,
+    50% 70%,21% 91%,32% 57%,2% 35%,39% 35%
+  );
+  animation:
+    float 20s linear infinite,
+    breathe 4s ease-in-out infinite;
 }
 
+@keyframes float{
+  from{transform:translateY(100vh) rotate(0deg)}
+  to{transform:translateY(-120vh) rotate(360deg)}
+}
+
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.6)}
+}
+
+/* HERO */
 .hero{
-  padding:90px 20px;
   text-align:center;
+  padding:100px 20px;
 }
 
 .title{
   font-size:3rem;
-  animation:fadeDown 1s;
+  animation:fadeDown 1s ease;
+}
+
+.subtitle{
+  opacity:.85;
 }
 
 @keyframes fadeDown{
   from{opacity:0;transform:translateY(-40px)}
-  to{opacity:1}
+  to{opacity:1;transform:translateY(0)}
 }
 
+/* למה לבחור בי */
 .why{
   padding:40px 20px;
   text-align:center;
@@ -54,47 +71,38 @@ body{
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+  gap:16px;
   margin-top:25px;
 }
 
 .card{
-  background:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.1);
   padding:20px;
   border-radius:16px;
   opacity:0;
-  transform:translateY(40px) scale(.9);
-  animation:card .6s forwards;
+  transform:translateY(40px);
+  animation:cardIn .6s ease forwards;
 }
 
-.card:nth-child(n){
-  animation-delay:calc(var(--i) * .15s);
+.card:nth-child(n){animation-delay:calc(var(--i)*.1s)}
+
+@keyframes cardIn{
+  to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes card{
-  to{opacity:1;transform:none}
-}
-
+/* כפתור */
 .main-btn{
-  background: linear-gradient(135deg, #1da1ff, #4fc3ff);
-  color:white;
+  background:linear-gradient(135deg,#1da1ff,#4fc3ff);
+  padding:14px 36px;
   border:none;
-  padding:14px 34px;
   border-radius:50px;
+  color:white;
   font-size:1.05rem;
-  cursor:pointer;
   margin:60px auto;
   display:block;
-  width:fit-content;
-  min-width:220px;
+  cursor:pointer;
   box-shadow:0 10px 30px rgba(29,161,255,.4);
-  transition:.3s;
 }
-
-.main-btn:hover{
-  transform:translateY(-3px) scale(1.05);
-}
-
 
 /* MODAL */
 .modal{
@@ -107,38 +115,44 @@ body{
   z-index:999;
 }
 
-.hidden{display:none}
+.modal.hidden{display:none}
 
-.media-wrapper img{
+.media-container img,
+.media-container video{
   max-width:90vw;
-  max-height:80vh;
+  max-height:85vh;
   border-radius:20px;
 }
 
+/* חצים */
 .arrow{
   position:absolute;
   top:50%;
-  font-size:48px;
+  font-size:45px;
+  color:white;
   cursor:pointer;
 }
 
-.left{left:15px}
-.right{right:15px}
+.arrow.left{left:20px}
+.arrow.right{right:20px}
 
+/* מובייל – בלי חצים */
 @media(max-width:768px){
   .arrow{display:none}
 }
 
+/* סגירה */
 .close{
   position:absolute;
-  top:15px;
-  right:20px;
+  top:20px;
+  right:25px;
   font-size:32px;
   cursor:pointer;
 }
 
+/* יצירת קשר */
 .contact{
-  padding:50px 20px;
+  padding:60px 20px;
   text-align:center;
 }
 
@@ -149,7 +163,7 @@ form{
 
 input,button{
   width:100%;
-  padding:14px;
+  padding:12px;
   margin:10px 0;
   border-radius:12px;
   border:none;
@@ -161,3 +175,7 @@ form button{
   font-size:1.1rem;
 }
 
+.phone,.email{
+  opacity:.9;
+  margin-top:10px;
+}
