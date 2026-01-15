@@ -122,14 +122,14 @@ body{
 
 
 .main-btn:hover{
-  transform: translateY(-2px) scale(1.03);
   background: linear-gradient(
     135deg,
-    #223a5c,
-    #162b46
+    #394b63,
+    #2b405a
   );
-  box-shadow: 0 14px 40px rgba(0,0,0,.5);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
 }
+
 
 
 .gallery-section{
@@ -227,6 +227,7 @@ form button{
     transform:none !important;
   }
 }
+
 
 
 
