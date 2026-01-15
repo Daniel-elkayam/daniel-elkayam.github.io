@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>דניאל אלקיים – פיקוח בנייה ושיפוצים</title>
+  <meta charset="UTF-8">
+  <title>דניאל אלקיים – פיקוח בנייה</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- רקע כוכבים -->
-<div class="stars"></div>
-<div class="stars2"></div>
+<div id="stars"></div>
 
 <header class="hero">
-  <h1 class="hero-title">דניאל אלקיים</h1>
-  <p class="hero-sub">פיקוח בנייה ושיפוצים בסטנדרט פרימיום</p>
+  <h1 class="title">דניאל אלקיים</h1>
+  <h2 class="subtitle">פיקוח בנייה ושיפוצים ברמה הגבוהה ביותר</h2>
 </header>
 
 <section class="why">
-  <h2>למה לבחור בי?</h2>
-
+  <h3>למה לבחור בי?</h3>
   <div class="cards">
-    <div class="why-card">⭐ פיקוח צמוד – בלי קיצורי דרך</div>
-    <div class="why-card">📦 ניסיון מוכח בפרויקטים מורכבים</div>
-    <div class="why-card">📸 שקיפות מלאה ותיעוד לכל שלב</div>
-    <div class="why-card">⏱ חיסכון בזמן וכסף</div>
-    <div class="why-card">🤝 ליווי אישי עד מסירת מפתח</div>
-    <div class="why-card">💎 סטנדרט ביצוע יוקרתי</div>
+    <div class="card">⭐ פיקוח צמוד – בלי קיצורי דרך</div>
+    <div class="card">🧱 ניסיון מוכח בפרויקטים מורכבים</div>
+    <div class="card">📸 שקיפות מלאה ועדכון שוטף</div>
+    <div class="card">⏱ חיסכון בזמן וכסף</div>
+    <div class="card">🤝 ליווי אישי מהתכנון עד המפתח</div>
+    <div class="card">💎 סטנדרט ביצוע יוקרתי</div>
   </div>
 </section>
 
 <section class="gallery-section">
-  <button id="openGallery">לצפייה בסרטונים ובתמונות</button>
+  <button id="openGallery" class="main-btn">
+    לצפייה בסרטונים ובתמונות
+  </button>
 
+  <!-- הגלריה מוסתרת לחלוטין -->
   <div id="gallery" class="gallery hidden">
     <!-- תמונות -->
     <img src="1.jpg">
@@ -48,33 +49,40 @@
     <img src="12.jpg">
 
     <!-- סרטונים -->
-    <video src="1.mp4" controls></video>
-    <video src="2.mp4" controls></video>
-    <video src="3.mp4" controls></video>
+    <video controls src="1.mp4"></video>
+    <video controls src="2.mp4"></video>
+    <video controls src="3.mp4"></video>
   </div>
 </section>
 
-<footer class="contact">
-  <p>📞 <a href="https://wa.me/972547921248">054-7921248</a></p>
-  <p>✉️ Elkayam.pikuah@gmail.com</p>
-</footer>
+<section class="contact">
+  <h3>יצירת קשר</h3>
+
+  <form onsubmit="sendWhatsApp(event)">
+    <input type="text" id="name" placeholder="שם מלא" required>
+    <input type="text" id="message" placeholder="על מה הפרויקט?" required>
+    <button type="submit">שלח בוואטסאפ</button>
+  </form>
+
+  <p class="phone">📞 054-7921248</p>
+  <p class="email">📧 Elkayam.pikuah@gmail.com</p>
+</section>
 
 <script>
-  const btn = document.getElementById("openGallery");
-  const gallery = document.getElementById("gallery");
+/* פתיחת גלריה */
+document.getElementById("openGallery").onclick = () => {
+  document.getElementById("gallery").classList.remove("hidden");
+  document.getElementById("openGallery").style.display = "none";
+};
 
-  btn.onclick = () => {
-    gallery.classList.remove("hidden");
-    gallery.scrollIntoView({behavior:"smooth"});
-  };
-
-  // אנימציית קלפים בעת טעינה
-  window.addEventListener("load", () => {
-    document.querySelectorAll(".why-card").forEach((card, i) => {
-      card.style.animationDelay = `${i * 0.15}s`;
-      card.classList.add("show");
-    });
-  });
+/* שליחת וואטסאפ */
+function sendWhatsApp(e){
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const msg = document.getElementById("message").value;
+  const text = `שלום, שמי ${name}. ${msg}`;
+  window.open(`https://wa.me/972547921248?text=${encodeURIComponent(text)}`);
+}
 </script>
 
 </body>
