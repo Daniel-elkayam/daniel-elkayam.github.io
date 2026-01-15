@@ -95,9 +95,13 @@ body{
 
 @media (max-width: 768px){
   .subtitle{
-    font-size: 1.15rem;
+    font-size: 1.15rem;      /* קצת יותר קטן */
+    padding: 8px 14px;       /* פחות גובה */
+    border-radius: 12px;
+    letter-spacing: 0.4px;
   }
 }
+
 
 
 /* למה לבחור בי */
@@ -253,6 +257,7 @@ form button{
     transform:none !important;
   }
 }
+
 
 
 
