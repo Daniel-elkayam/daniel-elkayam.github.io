@@ -76,16 +76,25 @@ body{
 }
 
 .main-btn{
-  display:block;
-  margin:60px auto;
-  padding:16px 32px;
+  background: linear-gradient(135deg, #1da1ff, #4fc3ff);
+  color:white;
   border:none;
-  border-radius:40px;
-  background:#1da1ff;
-  color:#fff;
-  font-size:1.1rem;
+  padding:14px 34px;
+  border-radius:50px;
+  font-size:1.05rem;
   cursor:pointer;
+  margin:60px auto;
+  display:block;
+  width:fit-content;
+  min-width:220px;
+  box-shadow:0 10px 30px rgba(29,161,255,.4);
+  transition:.3s;
 }
+
+.main-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+}
+
 
 /* MODAL */
 .modal{
@@ -151,3 +160,4 @@ form button{
   color:white;
   font-size:1.1rem;
 }
+
