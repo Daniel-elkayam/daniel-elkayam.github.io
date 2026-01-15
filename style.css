@@ -77,13 +77,20 @@ body{
 }
 
 .subtitle{
-  font-size: 1.3rem;          /* גדול יותר */
-  font-weight: 500;           /* קריא יותר */
-  opacity: 1;                 /* חד */
-  color: #ffffff;             /* לבן ברור */
-  letter-spacing: 0.4px;      /* אוויר בין אותיות */
-  text-shadow: 0 2px 6px rgba(0,0,0,.25); /* קריאות על רקע בהיר */
-  margin-top: 12px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1f2a37;              /* אפור כהה – קריא בהרבה */
+  letter-spacing: 0.6px;
+  margin-top: 14px;
+
+  /* 👇 זה הסוד */
+  background: rgba(255,255,255,.55);  /* פס בהיר מאחור */
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 14px;
+
+  /* צל עדין לטקסט */
+  text-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
 @media (max-width: 768px){
@@ -246,6 +253,7 @@ form button{
     transform:none !important;
   }
 }
+
 
 
 
