@@ -4,35 +4,40 @@
   <meta charset="UTF-8">
   <title>דניאל אלקיים – פיקוח בנייה</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta property="og:title" content="דניאל אלקיים – פיקוח בנייה ושיפוצים">
-  <meta property="og:description" content="פיקוח יוקרתי, ליווי אישי ושקט נפשי">
-  <meta property="og:image" content="3.jpg">
-
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- רקע אנימציה -->
 <div class="animated-bg"></div>
 
-<!-- פתיחה -->
 <header class="hero">
   <h1 class="intro-title">דניאל אלקיים</h1>
-  <p class="intro-sub">פיקוח בנייה ושיפוצים ברמה הגבוהה ביותר</p>
+  <p class="intro-sub">פיקוח בנייה • שיפוצים • שקט נפשי</p>
 
   <a class="btn-main"
-     href="https://wa.me/972547921248?text=שלום,%20אשמח%20לשיחת%20ייעוץ"
-     target="_blank">
-     📲 ייעוץ בוואטסאפ
-  </a>
+     href="https://wa.me/972547921248"
+     target="_blank">📲 ייעוץ בוואטסאפ</a>
 
-  <button class="btn-gallery" onclick="showGallery()">
+  <button id="openBtn" class="btn-gallery" onclick="openSite()">
     ▶ לצפייה בסרטונים ובתמונות
   </button>
 </header>
 
-<!-- גלריה מוסתרת -->
+<!-- למה לבחור בי -->
+<section id="why" class="why hidden">
+  <h2>למה לבחור דווקא בי?</h2>
+  <div class="why-grid">
+    <div class="why-card">🔍 פיקוח צמוד בשטח – בלי הפתעות</div>
+    <div class="why-card">🧱 ניסיון בפרויקטים מורכבים</div>
+    <div class="why-card">📸 תיעוד מלא ושקיפות מוחלטת</div>
+    <div class="why-card">🕒 חיסכון בזמן וכסף</div>
+    <div class="why-card">🤝 ליווי אישי עד המפתח</div>
+    <div class="why-card">⭐ עבודה ברמה הגבוהה ביותר</div>
+  </div>
+</section>
+
+<!-- גלריה -->
 <section id="gallery" class="gallery hidden">
   <h2>מהשטח</h2>
 
@@ -48,7 +53,6 @@
     <img src="10.jpg" onclick="openLightbox(8)">
     <img src="11.jpg" onclick="openLightbox(9)">
     <img src="12.jpg" onclick="openLightbox(10)">
-
     <video src="1.mp4" onclick="openLightbox(11)"></video>
     <video src="2.mp4" onclick="openLightbox(12)"></video>
     <video src="3.mp4" onclick="openLightbox(13)"></video>
@@ -69,59 +73,53 @@
 </div>
 
 <script>
-const media = [
- "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
- "1.mp4","2.mp4","3.mp4"
+const media=[
+"1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
+"1.mp4","2.mp4","3.mp4"
 ];
+let index=0,startX=0;
 
-let index = 0;
-let startX = 0;
-
-function showGallery() {
-  document.getElementById("gallery").classList.remove("hidden");
-  document.getElementById("gallery").scrollIntoView({behavior:"smooth"});
+function openSite(){
+  document.getElementById("openBtn").style.display="none";
+  document.getElementById("why").classList.remove("hidden");
+  setTimeout(()=>{
+    document.getElementById("gallery").classList.remove("hidden");
+  },600);
 }
 
-function openLightbox(i) {
-  index = i;
-  document.getElementById("lightbox").style.display = "flex";
+function openLightbox(i){
+  index=i;
+  document.getElementById("lightbox").style.display="flex";
   render();
 }
-
-function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
+function closeLightbox(){
+  document.getElementById("lightbox").style.display="none";
 }
-
-function changeSlide(dir) {
-  index = (index + dir + media.length) % media.length;
+function changeSlide(d){
+  index=(index+d+media.length)%media.length;
   render();
 }
-
-function render() {
-  const box = document.getElementById("lightbox-content");
-  box.innerHTML = "";
-  const file = media[index];
-
-  if (file.endsWith(".mp4")) {
-    const v = document.createElement("video");
-    v.src = file;
-    v.controls = true;
-    v.autoplay = true;
+function render(){
+  const box=document.getElementById("lightbox-content");
+  box.innerHTML="";
+  const f=media[index];
+  if(f.endsWith(".mp4")){
+    const v=document.createElement("video");
+    v.src=f; v.controls=true; v.autoplay=true;
     box.appendChild(v);
-  } else {
-    const img = document.createElement("img");
-    img.src = file;
-    box.appendChild(img);
+  }else{
+    const i=document.createElement("img");
+    i.src=f;
+    box.appendChild(i);
   }
 }
 
-/* החלקה במובייל */
-const lb = document.getElementById("lightbox");
-lb.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-lb.addEventListener("touchend", e => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) changeSlide(1);
-  if (endX - startX > 50) changeSlide(-1);
+const lb=document.getElementById("lightbox");
+lb.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+lb.addEventListener("touchend",e=>{
+  const endX=e.changedTouches[0].clientX;
+  if(startX-endX>50)changeSlide(1);
+  if(endX-startX>50)changeSlide(-1);
 });
 </script>
 
