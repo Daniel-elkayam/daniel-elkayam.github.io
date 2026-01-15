@@ -92,17 +92,25 @@ body{
 
 /* כפתור */
 .main-btn{
-  background:linear-gradient(135deg,#1da1ff,#4fc3ff);
-  padding:14px 36px;
-  border:none;
-  border-radius:50px;
-  color:white;
-  font-size:1.05rem;
-  margin:60px auto;
-  display:block;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(29,161,255,.4);
+  background: linear-gradient(135deg,#1da1ff,#4fc3ff);
+  padding: 14px 28px;          /* פחות רחב */
+  border: none;
+  border-radius: 999px;
+  color: white;
+  font-size: 1.05rem;
+  margin: 60px auto;
+  display: inline-flex;       /* 🔥 זה המרכז */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(29,161,255,.4);
 }
+
+/* מרכז אותו גם במובייל */
+.gallery-section{
+  text-align: center;
+}
+
 
 /* MODAL */
 .modal{
@@ -190,3 +198,4 @@ form button{
     border-radius: 14px;
   }
 }
+
