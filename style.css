@@ -1,52 +1,50 @@
 *{
   box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 body{
   margin:0;
-  background: radial-gradient(circle at top, #0b3c74, #020924);
+  background:#050d2d;
   color:#fff;
   overflow-x:hidden;
 }
 
 /* כוכבים */
-.stars, .stars2{
+#stars{
   position:fixed;
-  width:100%;
-  height:100%;
-  background:url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: moveStars 60s linear infinite;
-  z-index:-2;
-}
-.stars2{
-  opacity:.4;
-  animation-duration:120s;
+  inset:0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 80%, white, transparent),
+    radial-gradient(1px 1px at 40% 60%, white, transparent),
+    radial-gradient(2px 2px at 80% 20%, white, transparent);
+  animation:moveStars 60s linear infinite;
+  z-index:-1;
 }
 
 @keyframes moveStars{
-  from{background-position:0 0;}
-  to{background-position:10000px 5000px;}
+  from{transform:translateY(0)}
+  to{transform:translateY(-1000px)}
 }
 
 .hero{
+  padding:80px 20px;
   text-align:center;
-  padding:80px 20px 40px;
 }
 
-.hero-title{
-  font-size:2.5rem;
+.title{
+  font-size:3rem;
   animation:fadeDown 1s ease;
 }
 
-.hero-sub{
+.subtitle{
   opacity:.8;
-  margin-top:10px;
 }
 
 @keyframes fadeDown{
-  from{opacity:0; transform:translateY(-30px);}
-  to{opacity:1; transform:none;}
+  from{opacity:0; transform:translateY(-40px)}
+  to{opacity:1; transform:translateY(0)}
 }
 
 /* למה לבחור בי */
@@ -58,77 +56,91 @@ body{
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  max-width:900px;
-  margin:30px auto;
+  gap:15px;
+  margin-top:20px;
 }
 
-.why-card{
+.card{
   background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
   padding:20px;
-  border-radius:16px;
+  border-radius:15px;
   opacity:0;
   transform:translateY(40px);
+  animation:rise .6s ease forwards;
 }
 
-.why-card.show{
-  animation: rise .6s ease forwards;
-}
+.card:nth-child(1){animation-delay:.1s}
+.card:nth-child(2){animation-delay:.2s}
+.card:nth-child(3){animation-delay:.3s}
+.card:nth-child(4){animation-delay:.4s}
+.card:nth-child(5){animation-delay:.5s}
+.card:nth-child(6){animation-delay:.6s}
 
 @keyframes rise{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  to{opacity:1; transform:translateY(0)}
 }
+
+/* כפתור */
+.main-btn{
+  background:#1da1ff;
+  color:white;
+  border:none;
+  padding:16px 30px;
+  border-radius:40px;
+  font-size:1.1rem;
+  cursor:pointer;
+  margin:40px auto;
+  display:block;
+  transition:.3s;
+}
+.main-btn:hover{transform:scale(1.05)}
 
 /* גלריה */
-.gallery-section{
-  text-align:center;
-  padding:40px 20px;
-}
-
-#openGallery{
-  background:#1da1f2;
-  border:none;
-  color:#fff;
-  padding:15px 30px;
-  font-size:1.1rem;
-  border-radius:30px;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-
 .gallery{
-  margin-top:30px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
+  padding:20px;
 }
 
-.gallery img, .gallery video{
+.gallery img,
+.gallery video{
   width:100%;
-  border-radius:14px;
+  border-radius:15px;
 }
 
+/* הסתרה מוחלטת */
 .hidden{
   display:none;
 }
 
-/* פוטר */
+/* יצירת קשר */
 .contact{
+  padding:40px 20px;
   text-align:center;
-  padding:30px 20px;
-  opacity:.8;
 }
 
-.contact a{
-  color:#1da1f2;
-  text-decoration:none;
+form{
+  max-width:400px;
+  margin:auto;
 }
 
-/* מובייל */
-@media(max-width:600px){
-  .hero-title{font-size:2rem;}
+input,button{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+}
+
+form button{
+  background:#25D366;
+  color:white;
+  font-size:1.1rem;
+  cursor:pointer;
+}
+
+.phone,.email{
+  margin-top:10px;
+  opacity:.9;
 }
