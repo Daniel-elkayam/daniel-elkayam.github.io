@@ -130,9 +130,15 @@ body{
 
 
 .main-btn:hover{
-  transform:translateY(-2px) scale(1.03);
-  box-shadow:0 14px 40px rgba(29,161,255,.6);
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(
+    135deg,
+    #223a5c,
+    #162b46
+  );
+  box-shadow: 0 14px 40px rgba(0,0,0,.5);
 }
+
 
 .gallery-section{
   text-align:center;
@@ -229,4 +235,5 @@ form button{
     transform:none !important;
   }
 }
+
 
