@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>דניאל אלקיים – פיקוח בנייה</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>דניאל אלקיים – פיקוח בנייה ושיפוצים</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- רקע כוכבים -->
-<canvas id="stars"></canvas>
+<div class="stars"></div>
+<div class="stars2"></div>
 
 <header class="hero">
-  <h1 class="intro-title">דניאל אלקיים</h1>
-  <p class="intro-sub">פיקוח בנייה ושיפוצים ברמה הגבוהה ביותר</p>
-
-  <a class="btn-main"
-     href="https://wa.me/972547921248"
-     target="_blank">📲 ייעוץ בוואטסאפ</a>
-
-  <button class="btn-gallery" onclick="openLightbox(0)">
-    ▶ לצפייה בסרטונים ובתמונות
-  </button>
+  <h1 class="hero-title">דניאל אלקיים</h1>
+  <p class="hero-sub">פיקוח בנייה ושיפוצים בסטנדרט פרימיום</p>
 </header>
 
 <section class="why">
-  <h2>למה לבחור דווקא בי?</h2>
-  <div class="why-grid">
+  <h2>למה לבחור בי?</h2>
+
+  <div class="cards">
     <div class="why-card">⭐ פיקוח צמוד – בלי קיצורי דרך</div>
-    <div class="why-card">🧱 ניסיון מוכח בפרויקטים מורכבים</div>
+    <div class="why-card">📦 ניסיון מוכח בפרויקטים מורכבים</div>
     <div class="why-card">📸 שקיפות מלאה ותיעוד לכל שלב</div>
     <div class="why-card">⏱ חיסכון בזמן וכסף</div>
     <div class="why-card">🤝 ליווי אישי עד מסירת מפתח</div>
@@ -37,96 +30,51 @@
   </div>
 </section>
 
+<section class="gallery-section">
+  <button id="openGallery">לצפייה בסרטונים ובתמונות</button>
+
+  <div id="gallery" class="gallery hidden">
+    <!-- תמונות -->
+    <img src="1.jpg">
+    <img src="2.jpg">
+    <img src="4.jpg">
+    <img src="5.jpg">
+    <img src="6.jpg">
+    <img src="7.jpg">
+    <img src="8.jpg">
+    <img src="9.jpg">
+    <img src="10.jpg">
+    <img src="11.jpg">
+    <img src="12.jpg">
+
+    <!-- סרטונים -->
+    <video src="1.mp4" controls></video>
+    <video src="2.mp4" controls></video>
+    <video src="3.mp4" controls></video>
+  </div>
+</section>
+
 <footer class="contact">
-  <p>📞 <a href="tel:0547921248">054-792-1248</a></p>
-  <p>📧 <a href="mailto:Elkayam.pikuah@gmail.com">Elkayam.pikuah@gmail.com</a></p>
+  <p>📞 <a href="https://wa.me/972547921248">054-7921248</a></p>
+  <p>✉️ Elkayam.pikuah@gmail.com</p>
 </footer>
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox">
-  <span class="close" onclick="closeLightbox()">×</span>
-  <span class="arrow left" onclick="changeSlide(-1)">❮</span>
-  <span class="arrow right" onclick="changeSlide(1)">❯</span>
-  <div id="lightbox-content"></div>
-</div>
-
 <script>
-/* ===== כוכבים זזים ===== */
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-let w, h, stars = [];
+  const btn = document.getElementById("openGallery");
+  const gallery = document.getElementById("gallery");
 
-function resize(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
+  btn.onclick = () => {
+    gallery.classList.remove("hidden");
+    gallery.scrollIntoView({behavior:"smooth"});
+  };
 
-for(let i=0;i<120;i++){
-  stars.push({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    r:Math.random()*1.5,
-    s:Math.random()*0.5+0.2
+  // אנימציית קלפים בעת טעינה
+  window.addEventListener("load", () => {
+    document.querySelectorAll(".why-card").forEach((card, i) => {
+      card.style.animationDelay = `${i * 0.15}s`;
+      card.classList.add("show");
+    });
   });
-}
-
-function animateStars(){
-  ctx.clearRect(0,0,w,h);
-  ctx.fillStyle="white";
-  stars.forEach(star=>{
-    star.y += star.s;
-    if(star.y > h) star.y = 0;
-    ctx.beginPath();
-    ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(animateStars);
-}
-animateStars();
-
-/* ===== Lightbox ===== */
-const media=[
-"1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg",
-"9.jpg","10.jpg","11.jpg","12.jpg",
-"1.mp4","2.mp4","3.mp4"
-];
-let index=0,startX=0;
-
-function openLightbox(i){
-  index=i;
-  document.getElementById("lightbox").style.display="flex";
-  render();
-}
-function closeLightbox(){
-  document.getElementById("lightbox").style.display="none";
-}
-function changeSlide(d){
-  index=(index+d+media.length)%media.length;
-  render();
-}
-function render(){
-  const box=document.getElementById("lightbox-content");
-  box.innerHTML="";
-  const f=media[index];
-  if(f.endsWith(".mp4")){
-    const v=document.createElement("video");
-    v.src=f;v.controls=true;v.autoplay=true;
-    box.appendChild(v);
-  }else{
-    const i=document.createElement("img");
-    i.src=f;
-    box.appendChild(i);
-  }
-}
-const lb=document.getElementById("lightbox");
-lb.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-lb.addEventListener("touchend",e=>{
-  const endX=e.changedTouches[0].clientX;
-  if(startX-endX>50)changeSlide(1);
-  if(endX-startX>50)changeSlide(-1);
-});
 </script>
 
 </body>
