@@ -110,19 +110,24 @@ body{
 
 /* כפתור */
 .main-btn{
-  background: linear-gradient(135deg,#1da1ff,#4fc3ff);
-  padding:14px 28px;
-  border:none;
-  border-radius:999px;
-  color:white;
-  font-size:1.05rem;
-  margin:60px auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(29,161,255,.4);
+  background: linear-gradient(
+    135deg,
+    #1c2f4a,
+    #0f1f36
+  );
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  color: white;
+  font-size: 1.05rem;
+  margin: 60px auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
+
 
 .main-btn:hover{
   transform:translateY(-2px) scale(1.03);
@@ -224,3 +229,4 @@ form button{
     transform:none !important;
   }
 }
+
