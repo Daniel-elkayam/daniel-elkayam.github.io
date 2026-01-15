@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>דניאל אלקיים – פיקוח בנייה</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- תצוגה מקדימה לוואטסאפ -->
+  <!-- WhatsApp preview -->
   <meta property="og:title" content="דניאל אלקיים – פיקוח בנייה">
-  <meta property="og:description" content="פיקוח בנייה ושיפוצים בסטנדרט גבוה">
-  <meta property="og:image" content="https://YOUR-DOMAIN/3.jpg">
+  <meta property="og:description" content="פיקוח בנייה ושיפוצים בסטנדרט יוקרתי">
+  <meta property="og:image" content="https://daniel-elkayam.github.io/3.jpg">
   <meta property="og:type" content="website">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- רקע כוכבים -->
 <div id="stars"></div>
 
 <header class="hero">
@@ -27,85 +28,113 @@
   <div class="cards">
     <div class="card">⭐ פיקוח צמוד ואישי</div>
     <div class="card">🧱 ניסיון בפרויקטים מורכבים</div>
-    <div class="card">📸 שקיפות מלאה</div>
+    <div class="card">📸 שקיפות ועדכון שוטף</div>
     <div class="card">⏱ חיסכון בזמן וכסף</div>
-    <div class="card">🤝 ליווי עד קבלת מפתח</div>
-    <div class="card">💎 סטנדרט ביצוע גבוה</div>
+    <div class="card">🤝 ליווי מלא עד המפתח</div>
+    <div class="card">💎 רמת ביצוע גבוהה</div>
   </div>
 </section>
 
 <section class="gallery-section">
-  <button class="main-btn" id="openGallery">
+  <button id="openGallery" class="main-btn">
     לצפייה בסרטונים ובתמונות
   </button>
 </section>
 
-<!-- MODAL -->
-<div class="modal hidden" id="modal">
-  <span class="close" id="close">✕</span>
-  <span class="arrow left" id="prev">‹</span>
-  <span class="arrow right" id="next">›</span>
-
-  <div class="media-wrapper">
-    <img id="media">
-  </div>
+<!-- MODAL גלריה -->
+<div id="modal" class="modal hidden">
+  <span class="close" onclick="closeGallery()">✕</span>
+  <span class="arrow left" onclick="prev()">❮</span>
+  <div class="media-container"></div>
+  <span class="arrow right" onclick="next()">❯</span>
 </div>
 
 <section class="contact">
   <h2>יצירת קשר</h2>
-
   <form onsubmit="sendWhatsApp(event)">
-    <input id="name" placeholder="שם מלא" required>
-    <input id="msg" placeholder="על מה הפרויקט?" required>
-    <button>שלח בוואטסאפ</button>
+    <input type="text" id="name" placeholder="שם מלא" required>
+    <input type="text" id="message" placeholder="על מה הפרויקט?" required>
+    <button type="submit">שלח בוואטסאפ</button>
   </form>
-
-  <p>📞 054-7921248</p>
-  <p>📧 Elkayam.pikuah@gmail.com</p>
+  <p class="phone">📞 054-7921248</p>
+  <p class="email">📧 Elkayam.pikuah@gmail.com</p>
 </section>
 
 <script>
-const images = [
-  "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg",
-  "8.jpg","9.jpg","10.jpg","11.jpg","12.jpg"
+/* כוכבים */
+const stars = document.getElementById("stars");
+for(let i=0;i<160;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  s.style.animationDuration=8+Math.random()*20+"s";
+  s.style.opacity=Math.random();
+  stars.appendChild(s);
+}
+
+/* 3D תנועה */
+document.addEventListener("mousemove",e=>{
+  const x=(e.clientX/window.innerWidth-.5)*12;
+  const y=(e.clientY/window.innerHeight-.5)*12;
+  stars.style.transform=`rotateX(${y}deg) rotateY(${x}deg)`;
+});
+
+/* גלריה */
+const media=[
+ "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg",
+ "8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
+ "1.mp4","2.mp4","3.mp4"
 ];
+let index=0;
+const modal=document.getElementById("modal");
+const container=document.querySelector(".media-container");
 
-let index = 0;
-const modal = document.getElementById("modal");
-const media = document.getElementById("media");
-
-document.getElementById("openGallery").onclick = () => {
+document.getElementById("openGallery").onclick=()=>{
   modal.classList.remove("hidden");
   show();
 };
 
-document.getElementById("close").onclick = () => modal.classList.add("hidden");
-
-document.getElementById("prev").onclick = () => change(-1);
-document.getElementById("next").onclick = () => change(1);
+function closeGallery(){
+  modal.classList.add("hidden");
+  container.innerHTML="";
+}
 
 function show(){
-  media.src = images[index];
+  container.innerHTML="";
+  const src=media[index];
+  let el;
+  if(src.endsWith(".mp4")){
+    el=document.createElement("video");
+    el.src=src;
+    el.controls=true;
+    el.playsInline=true;
+  }else{
+    el=document.createElement("img");
+    el.src=src;
+  }
+  el.style.touchAction="pinch-zoom";
+  container.appendChild(el);
 }
 
-function change(n){
-  index = (index + n + images.length) % images.length;
-  show();
-}
+function next(){ index=(index+1)%media.length; show(); }
+function prev(){ index=(index-1+media.length)%media.length; show(); }
 
-/* סוויפ במובייל */
+/* סוויפ */
 let startX=0;
 modal.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
 modal.addEventListener("touchend",e=>{
-  let endX=e.changedTouches[0].clientX;
-  if(startX-endX>50) change(1);
-  if(endX-startX>50) change(-1);
+  const dx=e.changedTouches[0].clientX-startX;
+  if(dx>50) prev();
+  if(dx<-50) next();
 });
 
 /* וואטסאפ */
 function sendWhatsApp(e){
   e.preventDefault();
-  const text = `שלום, שמי ${name.value}. ${msg.value}`;
+  const name=nameInput.value;
+  const msg=message.value;
+  const text=`שלום, שמי ${name}. ${msg}`;
   window.open(`https://wa.me/972547921248?text=${encodeURIComponent(text)}`);
 }
 </script>
