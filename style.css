@@ -1,6 +1,6 @@
 *{
   box-sizing:border-box;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body{
@@ -10,7 +10,7 @@ body{
   overflow-x:hidden;
 }
 
-/* כוכבים */
+/* ===== כוכבים עם "נשימה" ===== */
 #stars{
   position:fixed;
   inset:0;
@@ -19,17 +19,36 @@ body{
     radial-gradient(1px 1px at 70% 80%, white, transparent),
     radial-gradient(1px 1px at 40% 60%, white, transparent),
     radial-gradient(2px 2px at 80% 20%, white, transparent);
-  animation:moveStars 60s linear infinite;
+  animation:
+    moveStars 80s linear infinite,
+    breathe 8s ease-in-out infinite;
   z-index:-1;
 }
 
-@keyframes moveStars{
-  from{transform:translateY(0)}
-  to{transform:translateY(-1000px)}
+#stars::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, white, transparent),
+    radial-gradient(2px 2px at 90% 40%, white, transparent),
+    radial-gradient(1px 1px at 50% 90%, white, transparent);
+  opacity:.4;
 }
 
+@keyframes moveStars{
+  from{background-position:0 0}
+  to{background-position:0 -2000px}
+}
+
+@keyframes breathe{
+  0%,100%{opacity:.9}
+  50%{opacity:1}
+}
+
+/* ===== HERO ===== */
 .hero{
-  padding:80px 20px;
+  padding:90px 20px;
   text-align:center;
 }
 
@@ -47,7 +66,7 @@ body{
   to{opacity:1; transform:translateY(0)}
 }
 
-/* למה לבחור בי */
+/* ===== למה לבחור בי ===== */
 .why{
   padding:40px 20px;
   text-align:center;
@@ -80,41 +99,73 @@ body{
   to{opacity:1; transform:translateY(0)}
 }
 
-/* כפתור */
+/* ===== כפתור ===== */
 .main-btn{
   background:#1da1ff;
   color:white;
   border:none;
-  padding:16px 30px;
+  padding:16px 32px;
   border-radius:40px;
   font-size:1.1rem;
   cursor:pointer;
-  margin:40px auto;
   display:block;
   transition:.3s;
 }
-.main-btn:hover{transform:scale(1.05)}
 
-/* גלריה */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-  padding:20px;
+.small-btn{
+  max-width:260px;
+  margin:60px auto;
 }
 
-.gallery img,
-.gallery video{
-  width:100%;
-  border-radius:15px;
+.main-btn:hover{
+  transform:scale(1.06);
 }
 
-/* הסתרה מוחלטת */
-.hidden{
+/* ===== MODAL ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal.hidden{
   display:none;
 }
 
-/* יצירת קשר */
+.media-container img,
+.media-container video{
+  max-width:90%;
+  max-height:85vh;
+  border-radius:20px;
+}
+
+/* חצים */
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:50px;
+  cursor:pointer;
+  padding:20px;
+}
+
+.arrow.left{left:20px}
+.arrow.right{right:20px}
+
+/* סגירה */
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:35px;
+  cursor:pointer;
+}
+
+/* ===== יצירת קשר ===== */
 .contact{
   padding:40px 20px;
   text-align:center;
@@ -144,56 +195,3 @@ form button{
   margin-top:10px;
   opacity:.9;
 }
-
-/* כפתור קטן ומרכזי */
-.small-btn{
-  max-width:280px;
-  margin:60px auto;
-}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-
-.modal.hidden{
-  display:none;
-}
-
-.media-container img,
-.media-container video{
-  max-width:90%;
-  max-height:85vh;
-  border-radius:20px;
-}
-
-/* חצים */
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:50px;
-  color:white;
-  cursor:pointer;
-  padding:20px;
-}
-
-.arrow.left{left:20px}
-.arrow.right{right:20px}
-
-/* סגירה */
-.close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:35px;
-  cursor:pointer;
-}
-
-
