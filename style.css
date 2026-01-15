@@ -144,3 +144,56 @@ form button{
   margin-top:10px;
   opacity:.9;
 }
+
+/* כפתור קטן ומרכזי */
+.small-btn{
+  max-width:280px;
+  margin:60px auto;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal.hidden{
+  display:none;
+}
+
+.media-container img,
+.media-container video{
+  max-width:90%;
+  max-height:85vh;
+  border-radius:20px;
+}
+
+/* חצים */
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:50px;
+  color:white;
+  cursor:pointer;
+  padding:20px;
+}
+
+.arrow.left{left:20px}
+.arrow.right{right:20px}
+
+/* סגירה */
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:35px;
+  cursor:pointer;
+}
+
+
