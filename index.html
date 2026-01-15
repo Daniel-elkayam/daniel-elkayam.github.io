@@ -9,56 +9,39 @@
 
 <body>
 
+<!-- רקע מונפש -->
 <div class="animated-bg"></div>
 
+<!-- פתיחה -->
 <header class="hero">
   <h1 class="intro-title">דניאל אלקיים</h1>
-  <p class="intro-sub">פיקוח בנייה • שיפוצים • שקט נפשי</p>
+  <p class="intro-sub">פיקוח בנייה ושיפוצים • מקצועיות • שקט נפשי</p>
 
   <a class="btn-main"
      href="https://wa.me/972547921248"
-     target="_blank">📲 ייעוץ בוואטסאפ</a>
+     target="_blank">
+     📲 ייעוץ בוואטסאפ
+  </a>
 
-  <button id="openBtn" class="btn-gallery" onclick="openSite()">
+  <button class="btn-gallery" onclick="openLightbox(0)">
     ▶ לצפייה בסרטונים ובתמונות
   </button>
 </header>
 
 <!-- למה לבחור בי -->
-<section id="why" class="why hidden">
+<section class="why">
   <h2>למה לבחור דווקא בי?</h2>
   <div class="why-grid">
     <div class="why-card">🔍 פיקוח צמוד בשטח – בלי הפתעות</div>
     <div class="why-card">🧱 ניסיון בפרויקטים מורכבים</div>
-    <div class="why-card">📸 תיעוד מלא ושקיפות מוחלטת</div>
+    <div class="why-card">📸 שקיפות מלאה ותיעוד לכל שלב</div>
     <div class="why-card">🕒 חיסכון בזמן וכסף</div>
-    <div class="why-card">🤝 ליווי אישי עד המפתח</div>
-    <div class="why-card">⭐ עבודה ברמה הגבוהה ביותר</div>
+    <div class="why-card">🤝 ליווי אישי עד סיום הפרויקט</div>
+    <div class="why-card">⭐ סטנדרט ביצוע גבוה ללא פשרות</div>
   </div>
 </section>
 
-<!-- גלריה -->
-<section id="gallery" class="gallery hidden">
-  <h2>מהשטח</h2>
-
-  <div class="media-grid">
-    <img src="1.jpg" onclick="openLightbox(0)">
-    <img src="2.jpg" onclick="openLightbox(1)">
-    <img src="4.jpg" onclick="openLightbox(2)">
-    <img src="5.jpg" onclick="openLightbox(3)">
-    <img src="6.jpg" onclick="openLightbox(4)">
-    <img src="7.jpg" onclick="openLightbox(5)">
-    <img src="8.jpg" onclick="openLightbox(6)">
-    <img src="9.jpg" onclick="openLightbox(7)">
-    <img src="10.jpg" onclick="openLightbox(8)">
-    <img src="11.jpg" onclick="openLightbox(9)">
-    <img src="12.jpg" onclick="openLightbox(10)">
-    <video src="1.mp4" onclick="openLightbox(11)"></video>
-    <video src="2.mp4" onclick="openLightbox(12)"></video>
-    <video src="3.mp4" onclick="openLightbox(13)"></video>
-  </div>
-</section>
-
+<!-- צור קשר -->
 <footer class="contact">
   <p>📞 <a href="tel:0547921248">054-792-1248</a></p>
   <p>📧 <a href="mailto:Elkayam.pikuah@gmail.com">Elkayam.pikuah@gmail.com</a></p>
@@ -73,53 +56,55 @@
 </div>
 
 <script>
-const media=[
-"1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg","12.jpg",
-"1.mp4","2.mp4","3.mp4"
+const media = [
+  "1.jpg","2.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg",
+  "9.jpg","10.jpg","11.jpg","12.jpg",
+  "1.mp4","2.mp4","3.mp4"
 ];
-let index=0,startX=0;
 
-function openSite(){
-  document.getElementById("openBtn").style.display="none";
-  document.getElementById("why").classList.remove("hidden");
-  setTimeout(()=>{
-    document.getElementById("gallery").classList.remove("hidden");
-  },600);
-}
+let index = 0;
+let startX = 0;
 
 function openLightbox(i){
-  index=i;
-  document.getElementById("lightbox").style.display="flex";
+  index = i;
+  document.getElementById("lightbox").style.display = "flex";
   render();
 }
+
 function closeLightbox(){
-  document.getElementById("lightbox").style.display="none";
+  document.getElementById("lightbox").style.display = "none";
 }
-function changeSlide(d){
-  index=(index+d+media.length)%media.length;
+
+function changeSlide(dir){
+  index = (index + dir + media.length) % media.length;
   render();
 }
+
 function render(){
-  const box=document.getElementById("lightbox-content");
-  box.innerHTML="";
-  const f=media[index];
-  if(f.endsWith(".mp4")){
-    const v=document.createElement("video");
-    v.src=f; v.controls=true; v.autoplay=true;
+  const box = document.getElementById("lightbox-content");
+  box.innerHTML = "";
+  const file = media[index];
+
+  if(file.endsWith(".mp4")){
+    const v = document.createElement("video");
+    v.src = file;
+    v.controls = true;
+    v.autoplay = true;
     box.appendChild(v);
-  }else{
-    const i=document.createElement("img");
-    i.src=f;
-    box.appendChild(i);
+  } else {
+    const img = document.createElement("img");
+    img.src = file;
+    box.appendChild(img);
   }
 }
 
-const lb=document.getElementById("lightbox");
-lb.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-lb.addEventListener("touchend",e=>{
-  const endX=e.changedTouches[0].clientX;
-  if(startX-endX>50)changeSlide(1);
-  if(endX-startX>50)changeSlide(-1);
+// החלקה במובייל
+const lb = document.getElementById("lightbox");
+lb.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+lb.addEventListener("touchend", e => {
+  const endX = e.changedTouches[0].clientX;
+  if(startX - endX > 50) changeSlide(1);
+  if(endX - startX > 50) changeSlide(-1);
 });
 </script>
 
