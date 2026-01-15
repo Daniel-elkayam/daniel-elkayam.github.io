@@ -20,6 +20,7 @@ body{
 
 .star{
   position:absolute;
+  will-change: transform;
   box-shadow: 0 0 8px rgba(255,255,255,.9);
   transform: scale(var(--s,1));
   width:4px;
@@ -43,12 +44,21 @@ body{
 
 @keyframes float{
   from{
-    transform:translateY(100vh) rotate(0deg) translateZ(0);
+    transform:
+      scale(var(--s))
+      translateY(100vh)
+      rotate(0deg)
+      translateZ(0);
   }
   to{
-    transform:translateY(-120vh) rotate(360deg) translateZ(80px);
+    transform:
+      scale(var(--s))
+      translateY(-120vh)
+      rotate(360deg)
+      translateZ(80px);
   }
 }
+
 
 @keyframes breathe{
   0%,100%{transform:scale(1)}
@@ -219,5 +229,19 @@ form button{
   }
 }
 
+
+/* אופטימיזציה למובייל */
+@media (max-width: 768px) {
+
+  .star{
+    box-shadow: none;              /* מוריד עומס */
+    animation-duration: 30s;       /* יותר איטי */
+  }
+
+  #stars{
+    transform: none !important;    /* בלי 3D */
+  }
+
+}
 
 
