@@ -179,3 +179,14 @@ form button{
   opacity:.9;
   margin-top:10px;
 }
+
+/* התאמת מדיה למובייל */
+@media (max-width: 768px) {
+  .media-container img,
+  .media-container video {
+    max-width: 92vw;
+    max-height: 65vh;   /* זה הפתרון לגודל הענק */
+    object-fit: contain;
+    border-radius: 14px;
+  }
+}
