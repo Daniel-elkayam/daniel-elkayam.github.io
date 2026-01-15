@@ -5,7 +5,14 @@
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#0b2a5e,#030b26);
+  /* 🔥 רקע עדין יותר – אפור בהיר עם נגיעה כחולה */
+  background:radial-gradient(
+    circle at top,
+    #dfe6ef 0%,
+    #bfc9d8 35%,
+    #8fa3bf 70%,
+    #5f7fa3 100%
+  );
   color:#fff;
   overflow-x:hidden;
 }
@@ -41,7 +48,6 @@ body{
   animation: breathe 4s ease-in-out infinite;
 }
 
-
 @keyframes float{
   from{
     transform:
@@ -59,12 +65,10 @@ body{
   }
 }
 
-
 @keyframes breathe{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.6)}
 }
-
 
 /* HERO */
 .hero{
@@ -72,18 +76,8 @@ body{
   padding:100px 20px;
 }
 
-.title{
-  font-size:3rem;
-  animation:fadeDown 1s ease;
-}
-
 .subtitle{
   opacity:.85;
-}
-
-@keyframes fadeDown{
-  from{opacity:0;transform:translateY(-40px)}
-  to{opacity:1;transform:translateY(0)}
 }
 
 /* למה לבחור בי */
@@ -100,7 +94,7 @@ body{
 }
 
 .card{
-  background:rgba(255,255,255,.1);
+  background:rgba(255,255,255,.15);
   padding:20px;
   border-radius:16px;
   opacity:0;
@@ -117,30 +111,27 @@ body{
 /* כפתור */
 .main-btn{
   background: linear-gradient(135deg,#1da1ff,#4fc3ff);
-  padding: 14px 28px;          /* פחות רחב */
-  border: none;
-  border-radius: 999px;
-  color: white;
-  font-size: 1.05rem;
-  margin: 60px auto;
-  display: inline-flex;       /* 🔥 זה המרכז */
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(29,161,255,.4);
+  padding:14px 28px;
+  border:none;
+  border-radius:999px;
+  color:white;
+  font-size:1.05rem;
+  margin:60px auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(29,161,255,.4);
 }
 
 .main-btn:hover{
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 14px 40px rgba(29,161,255,.6);
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 14px 40px rgba(29,161,255,.6);
 }
 
-
-/* מרכז אותו גם במובייל */
 .gallery-section{
-  text-align: center;
+  text-align:center;
 }
-
 
 /* MODAL */
 .modal{
@@ -162,7 +153,6 @@ body{
   border-radius:20px;
 }
 
-/* חצים */
 .arrow{
   position:absolute;
   top:50%;
@@ -174,12 +164,10 @@ body{
 .arrow.left{left:20px}
 .arrow.right{right:20px}
 
-/* מובייל – בלי חצים */
 @media(max-width:768px){
   .arrow{display:none}
 }
 
-/* סגירה */
 .close{
   position:absolute;
   top:20px;
@@ -218,30 +206,21 @@ form button{
   margin-top:10px;
 }
 
-/* התאמת מדיה למובייל */
-@media (max-width: 768px) {
+@media (max-width:768px){
   .media-container img,
-  .media-container video {
-    max-width: 92vw;
-    max-height: 65vh;   /* זה הפתרון לגודל הענק */
-    object-fit: contain;
-    border-radius: 14px;
+  .media-container video{
+    max-width:92vw;
+    max-height:65vh;
+    object-fit:contain;
+    border-radius:14px;
   }
-}
-
-
-/* אופטימיזציה למובייל */
-@media (max-width: 768px) {
 
   .star{
-    box-shadow: none;              /* מוריד עומס */
-    animation-duration: 30s;       /* יותר איטי */
+    box-shadow:none;
+    animation-duration:30s;
   }
 
   #stars{
-    transform: none !important;    /* בלי 3D */
+    transform:none !important;
   }
-
 }
-
-
