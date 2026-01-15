@@ -77,8 +77,21 @@ body{
 }
 
 .subtitle{
-  opacity:.85;
+  font-size: 1.3rem;          /* גדול יותר */
+  font-weight: 500;           /* קריא יותר */
+  opacity: 1;                 /* חד */
+  color: #ffffff;             /* לבן ברור */
+  letter-spacing: 0.4px;      /* אוויר בין אותיות */
+  text-shadow: 0 2px 6px rgba(0,0,0,.25); /* קריאות על רקע בהיר */
+  margin-top: 12px;
 }
+
+@media (max-width: 768px){
+  .subtitle{
+    font-size: 1.15rem;
+  }
+}
+
 
 /* למה לבחור בי */
 .why{
@@ -233,6 +246,7 @@ form button{
     transform:none !important;
   }
 }
+
 
 
 
